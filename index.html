@@ -26,6 +26,22 @@ body {
 
 .screen.active { display: flex; }
 
+/* ✨ FIRST PAGE TEXT ANIMATION */
+.intro-text {
+  animation: slideFade 2s ease forwards;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 button {
   padding: 14px 30px;
   border-radius: 30px;
@@ -34,7 +50,7 @@ button {
   color: white;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 /* 🍷 Wine red photo frame */
@@ -63,6 +79,22 @@ img {
   z-index: 1000;
 }
 
+/* 💖 Floating hearts (first page) */
+.intro-heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatIntro 6s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes floatIntro {
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
 /* 🎂 Cake */
 .cake { font-size: 120px; }
 .candles {
@@ -89,7 +121,7 @@ img {
   }
 }
 
-/* 💖 Floating hearts */
+/* 💖 Hearts */
 .heart {
   position: fixed;
   bottom: 0;
@@ -128,11 +160,21 @@ img {
 </audio>
 <button id="musicBtn">🔇</button>
 
-<!-- SCREENS -->
-
+<!-- 🌸 FIRST PAGE (UPGRADED) -->
 <div class="screen active">
-  <p>This is a message for the person</p>
-  <h2>who means more to me than she’ll ever realize 💕</h2>
+  <div class="intro-text">
+    <p>Before you scroll any further…</p>
+    <h2>
+      I just want you to know<br>
+      you are deeply loved,<br>
+      quietly appreciated,<br>
+      and truly special to me 🤍
+    </h2>
+    <p>
+      This little page holds feelings<br>
+      I don’t always say out loud.
+    </p>
+  </div>
   <button onclick="next()">Next →</button>
 </div>
 
@@ -159,12 +201,12 @@ img {
 
 <div class="screen">
   <p>I don’t say this enough,</p>
-  <p>but I’m really lucky to have you 🤍</p>
+  <p>but having you in my life</p>
+  <p>is something I’ll always be grateful for 🤍</p>
   <button onclick="next()">Next →</button>
 </div>
 
 <!-- 🎂 FINAL CAKE SCREEN -->
-
 <div class="screen">
   <div class="cake">🎂</div>
   <div class="candles" id="candles">🕯️ 🕯️ 🕯️</div>
@@ -207,11 +249,23 @@ btn.onclick = () => {
   }
 };
 
+/* 💖 First page floating hearts */
+setInterval(() => {
+  if (screens[0].classList.contains("active")) {
+    const h = document.createElement("div");
+    h.className = "intro-heart";
+    h.textContent = Math.random() > 0.5 ? "💖" : "✨";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+  }
+}, 800);
+
 function blowCandles() {
   document.getElementById("candles").textContent = "💨";
   document.getElementById("finalMsg").classList.remove("hidden");
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 120; i++) {
     const c = document.createElement("div");
     c.className = "confetti";
     c.style.left = Math.random() * 100 + "vw";
@@ -221,7 +275,7 @@ function blowCandles() {
     setTimeout(() => c.remove(), 5000);
   }
 
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 30; i++) {
     const h = document.createElement("div");
     h.className = "heart";
     h.textContent = "💖";
@@ -236,7 +290,7 @@ document.querySelectorAll("img").forEach(img => {
   img.addEventListener("load", () => {
     setInterval(() => {
       const r = img.getBoundingClientRect();
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 4; i++) {
         const h = document.createElement("div");
         h.className = "photo-heart";
         h.textContent = Math.random() > 0.5 ? "💖" : "✨";
@@ -245,7 +299,7 @@ document.querySelectorAll("img").forEach(img => {
         document.body.appendChild(h);
         setTimeout(() => h.remove(), 3000);
       }
-    }, 2500);
+    }, 2600);
   });
 });
 </script>
