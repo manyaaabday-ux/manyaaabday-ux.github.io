@@ -8,7 +8,7 @@
 <style>
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   background: #ffd6e0;
   color: #7a1c3b;
   text-align: center;
@@ -37,14 +37,17 @@ button {
   margin-top: 20px;
 }
 
+/* 🍷 Wine red photo frame */
 img {
   width: 85%;
   max-width: 320px;
   border-radius: 18px;
-  margin: 15px 0;
+  margin: 20px 0;
+  border: 6px solid #7a1c3b;
+  box-shadow: 0 0 20px rgba(122, 28, 59, 0.6);
 }
 
-/* Music button */
+/* 🎵 Music button */
 #musicBtn {
   position: fixed;
   bottom: 20px;
@@ -60,34 +63,25 @@ img {
   z-index: 1000;
 }
 
-/* Cake */
-.cake {
-  font-size: 120px;
-  position: relative;
-}
-
+/* 🎂 Cake */
+.cake { font-size: 120px; }
 .candles {
   font-size: 40px;
   animation: flicker 1s infinite alternate;
 }
-
 @keyframes flicker {
   from { opacity: 1; }
   to { opacity: 0.6; }
 }
 
-.hidden { display: none; }
-
-/* Confetti */
+/* 🎉 Confetti */
 .confetti {
   position: fixed;
   width: 8px;
   height: 8px;
-  background: red;
   top: -10px;
   animation: fall linear forwards;
 }
-
 @keyframes fall {
   to {
     transform: translateY(100vh) rotate(360deg);
@@ -95,14 +89,13 @@ img {
   }
 }
 
-/* Floating hearts */
+/* 💖 Floating hearts */
 .heart {
   position: fixed;
   bottom: 0;
   font-size: 20px;
   animation: floatUp 4s linear forwards;
 }
-
 @keyframes floatUp {
   to {
     transform: translateY(-100vh);
@@ -110,15 +103,21 @@ img {
   }
 }
 
-/* Fade-in text */
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 2s forwards;
+/* 💖 Hearts around photos */
+.photo-heart {
+  position: absolute;
+  font-size: 18px;
+  animation: floatHeart 3s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes floatHeart {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-60px) scale(1.4); }
 }
 
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
+.hidden { display: none; }
+.fade-in { opacity: 0; animation: fadeIn 2s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
 </style>
 </head>
 
@@ -212,8 +211,7 @@ function blowCandles() {
   document.getElementById("candles").textContent = "💨";
   document.getElementById("finalMsg").classList.remove("hidden");
 
-  // Confetti
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 100; i++) {
     const c = document.createElement("div");
     c.className = "confetti";
     c.style.left = Math.random() * 100 + "vw";
@@ -223,8 +221,7 @@ function blowCandles() {
     setTimeout(() => c.remove(), 5000);
   }
 
-  // Hearts
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 25; i++) {
     const h = document.createElement("div");
     h.className = "heart";
     h.textContent = "💖";
@@ -233,6 +230,24 @@ function blowCandles() {
     setTimeout(() => h.remove(), 4000);
   }
 }
+
+/* 💖 Hearts around photos */
+document.querySelectorAll("img").forEach(img => {
+  img.addEventListener("load", () => {
+    setInterval(() => {
+      const r = img.getBoundingClientRect();
+      for (let i = 0; i < 5; i++) {
+        const h = document.createElement("div");
+        h.className = "photo-heart";
+        h.textContent = Math.random() > 0.5 ? "💖" : "✨";
+        h.style.left = r.left + Math.random() * r.width + "px";
+        h.style.top = r.top + r.height / 2 + "px";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 3000);
+      }
+    }, 2500);
+  });
+});
 </script>
 
 </body>
