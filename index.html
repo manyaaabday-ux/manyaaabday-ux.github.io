@@ -8,11 +8,13 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   background: #ffd6e0;
   color: #7a1c3b;
   text-align: center;
+  overflow-x: hidden;
 }
+
 .screen {
   min-height: 100vh;
   display: none;
@@ -21,21 +23,28 @@ body {
   align-items: center;
   padding: 25px;
 }
+
 .screen.active { display: flex; }
+
 button {
-  padding: 12px 28px;
+  padding: 14px 30px;
   border-radius: 30px;
   border: none;
   background: #e63946;
   color: white;
   font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
 }
+
 img {
   width: 85%;
   max-width: 320px;
   border-radius: 18px;
-  margin: 20px 0;
+  margin: 15px 0;
 }
+
+/* Music button */
 #musicBtn {
   position: fixed;
   bottom: 20px;
@@ -47,6 +56,68 @@ img {
   height: 55px;
   border-radius: 50%;
   font-size: 22px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Cake */
+.cake {
+  font-size: 120px;
+  position: relative;
+}
+
+.candles {
+  font-size: 40px;
+  animation: flicker 1s infinite alternate;
+}
+
+@keyframes flicker {
+  from { opacity: 1; }
+  to { opacity: 0.6; }
+}
+
+.hidden { display: none; }
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: red;
+  top: -10px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: 0;
+  font-size: 20px;
+  animation: floatUp 4s linear forwards;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+/* Fade-in text */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
 }
 </style>
 </head>
@@ -58,9 +129,11 @@ img {
 </audio>
 <button id="musicBtn">🔇</button>
 
+<!-- SCREENS -->
+
 <div class="screen active">
-  <h2>This is a message for the person</h2>
-  <p>who means more to me than she’ll ever realize 💕</p>
+  <p>This is a message for the person</p>
+  <h2>who means more to me than she’ll ever realize 💕</h2>
   <button onclick="next()">Next →</button>
 </div>
 
@@ -91,12 +164,26 @@ img {
   <button onclick="next()">Next →</button>
 </div>
 
+<!-- 🎂 FINAL CAKE SCREEN -->
+
 <div class="screen">
-  <h2>To Manyaaa,</h2>
-  <p>
-    Happy Birthday — Feb 13 🎉<br><br>
-    Always here 🤍
-  </p>
+  <div class="cake">🎂</div>
+  <div class="candles" id="candles">🕯️ 🕯️ 🕯️</div>
+  <button onclick="blowCandles()">Tap to blow the candles 🎂</button>
+
+  <div id="finalMsg" class="hidden fade-in">
+    <p><strong>Some people feel like home.</strong></p>
+    <p>You are one of those people for me.</p>
+    <p>
+      Thank you for being my constant,<br>
+      my comfort, and my safest place.
+    </p>
+    <p>
+      No matter where life takes us,<br>
+      I’ll always wish for your happiness first.
+    </p>
+    <p><strong>Happy Birthday, Manyaaa 🤍</strong></p>
+  </div>
 </div>
 
 <script>
@@ -120,6 +207,32 @@ btn.onclick = () => {
     btn.textContent = "🔇";
   }
 };
+
+function blowCandles() {
+  document.getElementById("candles").textContent = "💨";
+  document.getElementById("finalMsg").classList.remove("hidden");
+
+  // Confetti
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    c.style.animationDuration = (2 + Math.random() * 3) + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }
+
+  // Hearts
+  for (let i = 0; i < 20; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
+  }
+}
 </script>
 
 </body>
