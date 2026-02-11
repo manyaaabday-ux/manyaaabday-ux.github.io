@@ -3,275 +3,241 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Manyaaa 🤍</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Happy Birthday Manyaaa</title>
 
 <style>
-:root{
-  --primary:#ff4e7a;
-  --secondary:#ff8fab;
-  --glass:rgba(255,255,255,0.07);
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ffd6e0;
+  color: #7a1c3b;
+  text-align: center;
+  overflow-x: hidden;
 }
 
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#1a0b13,#4a1626,#8a2c4d);
-  background-size:300% 300%;
-  animation:bgShift 14s ease infinite;
-  color:white;
-  overflow:hidden;
-  text-align:center;
+.screen {
+  min-height: 100vh;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
 }
 
-@keyframes bgShift{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+.screen.active { display: flex; }
+
+button {
+  padding: 14px 30px;
+  border-radius: 30px;
+  border: none;
+  background: #e63946;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 25px;
 }
 
-h1,h2{
-  font-family:'Playfair Display',serif;
-  letter-spacing:1px;
+/* 🍷 Wine red photo frame */
+.photo-frame {
+  width: 85%;
+  max-width: 320px;
+  border-radius: 18px;
+  border: 6px solid #7a1c3b;
+  box-shadow: 0 0 20px rgba(122, 28, 59, 0.6);
+  margin-bottom: 18px;
 }
 
-.screen{
-  position:absolute;
-  width:100%;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding:30px;
-  backdrop-filter:blur(14px);
-  background:var(--glass);
-  opacity:0;
-  pointer-events:none;
-  transform:translateY(40px);
-  transition:all .9s cubic-bezier(.25,.8,.25,1);
+/* 💌 Photo message */
+.photo-msg {
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 320px;
+  animation: fadeUp 1.5s ease forwards;
 }
 
-.screen.active{
-  opacity:1;
-  pointer-events:auto;
-  transform:translateY(0);
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-button{
-  padding:14px 38px;
-  border-radius:50px;
-  border:none;
-  background:linear-gradient(45deg,var(--primary),var(--secondary));
-  color:white;
-  font-size:15px;
-  cursor:pointer;
-  margin-top:25px;
-  transition:.35s;
-  box-shadow:0 10px 30px rgba(255,78,122,.4);
+/* 🎵 Music button */
+#musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #e63946;
+  color: white;
+  border: none;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 1000;
 }
 
-button:hover{
-  transform:translateY(-4px);
-  box-shadow:0 15px 40px rgba(255,78,122,.7);
+/* 💖 Floating hearts */
+.heart {
+  position: fixed;
+  bottom: 0;
+  font-size: 20px;
+  animation: floatUp 4s linear forwards;
 }
 
-.photo-frame{
-  width:85%;
-  max-width:330px;
-  border-radius:22px;
-  border:3px solid rgba(255,255,255,.4);
-  box-shadow:0 25px 50px rgba(0,0,0,.5);
-  margin-bottom:20px;
-  transition:.5s;
+@keyframes floatUp {
+  to { transform: translateY(-100vh); opacity: 0; }
 }
 
-.photo-frame:hover{
-  transform:scale(1.05) rotate(.5deg);
+/* 🎂 Cake */
+.cake { font-size: 120px; }
+.candles {
+  font-size: 40px;
+  animation: flicker 1s infinite alternate;
+}
+@keyframes flicker {
+  from { opacity: 1; }
+  to { opacity: 0.6; }
 }
 
-.floating-heart{
-  position:fixed;
-  bottom:-20px;
-  opacity:.4;
-  animation:floatUp linear forwards;
+/* 🎉 Confetti */
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  top: -10px;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
-@keyframes floatUp{
-  to{
-    transform:translateY(-110vh);
-    opacity:0;
-  }
-}
-
-.confetti{
-  position:fixed;
-  width:8px;
-  height:8px;
-  top:-10px;
-  animation:fall linear forwards;
-}
-
-@keyframes fall{
-  to{
-    transform:translateY(100vh) rotate(720deg);
-    opacity:0;
-  }
-}
-
-#musicBtn{
-  position:fixed;
-  bottom:25px;
-  right:25px;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  font-size:22px;
-  border:none;
-  background:rgba(255,255,255,.15);
-  backdrop-filter:blur(10px);
-  color:white;
-  cursor:pointer;
-  z-index:999;
-}
-
-.cake{font-size:120px;}
-.candles{font-size:40px;transition:.8s;}
-
-#finalMsg{
-  max-width:420px;
-  margin-top:20px;
-  opacity:0;
-  transition:1.5s;
-}
-#finalMsg.show{opacity:1;}
+.hidden { display: none; }
+.fade-in { opacity: 0; animation: fadeIn 2s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
 </style>
 </head>
 
 <body>
 
 <audio id="music" loop>
-<source src="blue.mp3.mp3.mp3" type="audio/mpeg">
+  <source src="blue.mp3.mp3.mp3" type="audio/mpeg">
 </audio>
-
 <button id="musicBtn">🔇</button>
 
-<!-- SCREENS -->
-
+<!-- INTRO -->
 <div class="screen active">
   <p>Before you go ahead…</p>
   <h2>This is something I made<br>just for you 🤍</h2>
-  <button onclick="nextScreen()">Tap when you’re ready →</button>
+  <button onclick="next()">Tap when you’re ready →</button>
 </div>
 
 <div class="screen">
   <h1>Hi Manyaaa 🎂💖</h1>
-  <button onclick="nextScreen()">Next →</button>
+  <button onclick="next()">Next →</button>
 </div>
+
+<!-- 📸 PHOTO SCREENS -->
 
 <div class="screen">
   <img src="photo1.jpg.jpeg" class="photo-frame">
-  <p>This moment reminds me how lucky I am to have you.</p>
-  <button onclick="nextScreen()">Next →</button>
+  <p class="photo-msg">
+    This moment reminds me how lucky I am to have you.
+  </p>
+  <button onclick="next()">Next →</button>
 </div>
 
 <div class="screen">
   <img src="photo2.jpg.jpeg" class="photo-frame">
-  <p>No matter the day, memories like this make everything lighter.</p>
-  <button onclick="nextScreen()">Next →</button>
+  <p class="photo-msg">
+    No matter the day, memories like this make everything lighter.
+  </p>
+  <button onclick="next()">Next →</button>
 </div>
 
 <div class="screen">
   <img src="photo3.jpg.jpeg" class="photo-frame">
-  <p>With you, even ordinary moments feel special.</p>
-  <button onclick="nextScreen()">Next →</button>
+  <p class="photo-msg">
+    With you, even ordinary moments feel special.
+  </p>
+  <button onclick="next()">Next →</button>
 </div>
 
 <div class="screen">
   <img src="photo4.jpg.jpeg" class="photo-frame">
-  <p>This is one of those memories I’ll always hold close.</p>
-  <button onclick="nextScreen()">Next →</button>
+  <p class="photo-msg">
+    This is one of those memories I’ll always hold close.
+  </p>
+  <button onclick="next()">Next →</button>
 </div>
 
 <div class="screen">
   <img src="photo5.jpg.jpeg" class="photo-frame">
-  <p>And there are so many more moments I’m grateful for…</p>
-  <button onclick="nextScreen()">Next →</button>
+  <p class="photo-msg">
+    And there are so many more moments I’m grateful for…
+  </p>
+  <button onclick="next()">Next →</button>
 </div>
 
+<!-- 🎂 FINAL CAKE -->
 <div class="screen">
   <div class="cake">🎂</div>
   <div class="candles" id="candles">🕯️ 🕯️ 🕯️</div>
   <button onclick="blowCandles()">Tap to blow the candles 🎂</button>
 
-  <div id="finalMsg">
+  <div id="finalMsg" class="hidden fade-in">
     <p><strong>Some people feel like home.</strong></p>
     <p>You are one of those people for me.</p>
-    <p>Thank you for being my constant,<br>my comfort, and my safest place.</p>
+    <p>
+      Thank you for being my constant,<br>
+      my comfort, and my safest place.
+    </p>
     <p><strong>Happy Birthday, Manyaaa 🤍</strong></p>
   </div>
 </div>
 
 <script>
-const screens=document.querySelectorAll('.screen');
-const music=document.getElementById('music');
-const musicBtn=document.getElementById('musicBtn');
-let index=0;
+let i = 0;
+const screens = document.querySelectorAll('.screen');
+const music = document.getElementById('music');
+const btn = document.getElementById('musicBtn');
 
-/* Screen Controller */
-function nextScreen(){
-  screens[index].classList.remove('active');
-  index++;
-  if(index<screens.length){
-    screens[index].classList.add('active');
-  }
+function next() {
+  screens[i].classList.remove('active');
+  i++;
+  if (i < screens.length) screens[i].classList.add('active');
 }
 
-/* Music Toggle */
-musicBtn.onclick=()=>{
-  if(music.paused){
+btn.onclick = () => {
+  if (music.paused) {
     music.play();
-    musicBtn.textContent="🔊";
-  }else{
+    btn.textContent = "🔊";
+  } else {
     music.pause();
-    musicBtn.textContent="🔇";
+    btn.textContent = "🔇";
   }
 };
 
-/* Ambient Heart Engine */
-setInterval(()=>{
-  const heart=document.createElement("div");
-  heart.className="floating-heart";
-  heart.textContent="💖";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=(15+Math.random()*25)+"px";
-  heart.style.animationDuration=(6+Math.random()*4)+"s";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),10000);
-},900);
+function blowCandles() {
+  document.getElementById("candles").textContent = "💨";
+  document.getElementById("finalMsg").classList.remove("hidden");
 
-/* Final Event */
-function blowCandles(){
-  const candles=document.getElementById("candles");
-  candles.style.opacity="0";
-  candles.style.transform="scale(.5)";
-  setTimeout(()=>{
-    candles.textContent="💨";
-    candles.style.opacity="1";
-    candles.style.transform="scale(1)";
-  },600);
-
-  document.getElementById("finalMsg").classList.add("show");
-
-  for(let i=0;i<120;i++){
-    const c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.background=`hsl(${Math.random()*360},100%,60%)`;
-    c.style.animationDuration=(3+Math.random()*2)+"s";
+  for (let i = 0; i < 100; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    c.style.animationDuration = (2 + Math.random() * 3) + "s";
     document.body.appendChild(c);
-    setTimeout(()=>c.remove(),5000);
+    setTimeout(() => c.remove(), 5000);
+  }
+
+  for (let i = 0; i < 25; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
   }
 }
 </script>
